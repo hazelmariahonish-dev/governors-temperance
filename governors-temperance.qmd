@@ -50,7 +50,11 @@ The setup chunk of this document carries forward the work from Wisdom and Courag
 ### Predictions
 
 Use `predictions(fit_governors)` to estimate the years lived after the election for individual candidates in the sample.
+```{r}
 
+predictions(fit_governors)
+
+```
 
 
 Use `avg_predictions(fit_governors, by = "election_result")` to estimate the average years lived after the election for winners and losers.
@@ -79,6 +83,14 @@ Why is the estimate from `avg_comparisons()` so much larger than the difference 
 
 Create a visualization of the average predictions by election result using `plot_predictions()`.
 
+```{r}
+library(marginaleffects)
+
+plot_predictions(
+  fit_governors,
+  condition = "election_result"
+)
+```
 
 
 What measure of uncertainty is shown in this plot?
@@ -86,14 +98,20 @@ What measure of uncertainty is shown in this plot?
 
 
 Create a plot showing predicted years lived after the election as a function of `election_age`, separately for winners and losers.
+```{r}
+library(marginaleffects)
 
-
+plot_predictions(
+  fit_governors,
+  condition = c("election_age", "election_result")
+)
+```
 
 ### Interpretation
 
 How does the life insurer interpret the estimated effect of winning? How does the researcher interpret the same number differently?
 
-
+The life insurer interprets the estimated effect of winning by the years lived after, and not in a causal way. 
 
 ### Humility
 
